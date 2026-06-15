@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { questionnaireSections } from "@/data/questions";
+import { saveAnswers } from "@/utils/saveAnswers";
 
 export default function Questionnaire() {
   const [sectionIndex, setSectionIndex] = useState(0);
@@ -18,14 +19,19 @@ export default function Questionnaire() {
     }));
   };
 
-  const next = () => {
-    if (sectionIndex < questionnaireSections.length - 1) {
-      setSectionIndex(sectionIndex + 1);
-    } else {
-      console.log("Réponses :", answers);
+const next = async () => {
+  if (sectionIndex < questionnaireSections.length - 1) {
+    setSectionIndex(sectionIndex + 1);
+  } else {
+    const success = await saveAnswers(answers);
+
+    if (success) {
       setSubmitted(true);
+    } else {
+      alert("Erreur lors de l'envoi.");
     }
-  };
+  }
+};
 
   const previous = () => {
     if (sectionIndex > 0) {
