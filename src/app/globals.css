@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fafaf8;
+  color: #0f172a;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+}
+
+video {
+  pointer-events: none;
+}
+
+/* Effet premium sur le bouton principal */
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* Amélioration mobile */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
