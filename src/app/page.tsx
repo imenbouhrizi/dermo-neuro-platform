@@ -83,14 +83,14 @@ export default function Home() {
 
             <h1 className="mx-auto max-w-5xl text-5xl font-light leading-tight tracking-tight text-slate-900 md:text-7xl">
               {lang === "fr"
-                ? "Découvrez une nouvelle approche dermocosmétique"
-                : "Discover a new dermocosmetic approach"}
+                ? "Votre avis inspire l'innovation"
+                : "Your insights inspire innovation"}
             </h1>
 
             <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-slate-700 md:text-xl">
               {lang === "fr"
-                ? "Une expérience inspirée par la science, les émotions et le bien-être de la peau."
-                : "An experience inspired by science, emotions and skin well-being."}
+                ? "Contribuez à une étude sur la dermocosmétique, les émotions et l’expérience de soin"
+                : "Contribute to a study exploring dermocosmetics, emotions, and the skincare experience"}
             </p>
 
             <div className="mt-12">
