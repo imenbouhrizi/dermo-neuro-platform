@@ -3,13 +3,15 @@
 import { useRef, useState } from "react";
 import { Sparkles, Volume2, VolumeX } from "lucide-react";
 import ConsentScreen from "@/components/ConsentScreen";
-import ConceptScreen from "@/components/ConceptScreen";
 import Questionnaire from "@/components/Questionnaire";
 
+type Lang = "fr" | "en";
+
 export default function Home() {
-  const [step, setStep] = useState<
-    "home" | "consent" | "concept" | "questionnaire"
-  >("home");
+
+  const [step, setStep] = useState<"home" | "consent" | "questionnaire">("home");
+
+  const [lang, setLang] = useState<Lang>("fr");
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const [musicEnabled, setMusicEnabled] = useState(false);
@@ -29,7 +31,13 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-hidden">
-      <video autoPlay muted loop playsInline className="fixed inset-0 h-full w-full object-cover">
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="fixed inset-0 h-full w-full object-cover"
+      >
         <source src="/background.mp4" type="video/mp4" />
       </video>
 
@@ -39,18 +47,50 @@ export default function Home() {
 
       {step === "home" && (
         <section className="relative z-10 flex min-h-screen items-center justify-center px-6">
+          <div className="absolute right-8 top-8 z-30 flex gap-2 rounded-full border border-white/60 bg-white/40 p-2 backdrop-blur-md shadow-lg">
+            <button
+              type="button"
+              onClick={() => setLang("fr")}
+              className={`rounded-full px-4 py-2 text-sm transition-all ${
+                lang === "fr"
+                  ? "bg-slate-900 text-white"
+                  : "bg-white/50 text-slate-700 hover:bg-white/70"
+              }`}
+            >
+              🇫🇷 Français
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setLang("en")}
+              className={`rounded-full px-4 py-2 text-sm transition-all ${
+                lang === "en"
+                  ? "bg-slate-900 text-white"
+                  : "bg-white/50 text-slate-700 hover:bg-white/70"
+              }`}
+            >
+              🇬🇧 English
+            </button>
+          </div>
+
           <div className="max-w-5xl text-center">
             <div className="mx-auto mb-8 flex w-fit items-center gap-2 rounded-full border border-white/60 bg-white/40 px-6 py-3 text-sm text-slate-700 backdrop-blur-md shadow-lg">
               <Sparkles size={16} />
-              Expérience neuro-dermocosmétique
+              {lang === "fr"
+                ? "Expérience neuro-dermocosmétique"
+                : "Neuro-dermocosmetic experience"}
             </div>
 
             <h1 className="mx-auto max-w-5xl text-5xl font-light leading-tight tracking-tight text-slate-900 md:text-7xl">
-              Découvrez une nouvelle approche dermocosmétique
+              {lang === "fr"
+                ? "Découvrez une nouvelle approche dermocosmétique"
+                : "Discover a new dermocosmetic approach"}
             </h1>
 
             <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-slate-700 md:text-xl">
-              Une expérience inspirée par la science, les émotions et le bien-être de la peau.
+              {lang === "fr"
+                ? "Une expérience inspirée par la science, les émotions et le bien-être de la peau."
+                : "An experience inspired by science, emotions and skin well-being."}
             </p>
 
             <div className="mt-12">
@@ -58,22 +98,23 @@ export default function Home() {
                 onClick={() => setStep("consent")}
                 className="rounded-full bg-slate-900 px-10 py-5 text-lg font-medium text-white shadow-2xl shadow-slate-900/30 transition-all duration-300 hover:scale-105"
               >
-                Commencer l'expérience
+                {lang === "fr"
+                  ? "Commencer l'expérience"
+                  : "Start the experience"}
               </button>
             </div>
           </div>
         </section>
       )}
 
-      {step === "consent" && (
-        <ConsentScreen onContinue={() => setStep("concept")} />
-      )}
+{step === "consent" && (
+  <ConsentScreen
+    lang={lang}
+    onContinue={() => setStep("questionnaire")}
+  />
+)}
 
-      {step === "concept" && (
-        <ConceptScreen onContinue={() => setStep("questionnaire")} />
-      )}
-
-      {step === "questionnaire" && <Questionnaire />}
+      {step === "questionnaire" && <Questionnaire lang={lang} />}
 
       <button
         onClick={toggleMusic}
@@ -82,7 +123,13 @@ export default function Home() {
         {musicEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
 
         <span className="text-sm">
-          {musicEnabled ? "Ambiance activée" : "Activer l'ambiance sonore"}
+          {musicEnabled
+            ? lang === "fr"
+              ? "Ambiance activée"
+              : "Ambience enabled"
+            : lang === "fr"
+            ? "Activer l'ambiance sonore"
+            : "Enable sound ambience"}
         </span>
       </button>
     </main>
