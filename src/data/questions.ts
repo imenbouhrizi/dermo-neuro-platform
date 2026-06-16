@@ -124,8 +124,8 @@ export const questionnaireSections: QuestionnaireSection[] = [
   {
     title: { fr: "Adhésion au concept", en: "Concept adhesion" },
       intro: {
-      fr: "Imaginez une marque dermocosmétique associant naturalité, expertise scientifique et expérience sensorielle. Son approche personnalisée prend en compte l’influence des émotions, de l’environnement et du mode de vie sur la peau afin de mieux comprendre ses besoins et d’offrir une expérience de soin engageante.",
-      en: "Imagine a dermocosmetic brand combining naturality, scientific expertise and sensory experience. Its personalized approach takes into account the influence of emotions, the environment and lifestyle on the skin in order to better understand its needs and offer an engaging skincare experience.",
+      fr: "Imaginez une marque dermocosmétique associant naturalité, expertise scientifique et expérience sensorielle dans un environnement luxueux. Son approche personnalisée prend en compte l’influence des émotions, de l’environnement et du mode de vie sur la peau afin de mieux comprendre ses besoins et d’offrir une expérience de soin engageante.",
+      en: "Imagine a dermocosmetic brand that combines naturality, scientific expertise, and a sensory experience within a luxurious environment. Its personalized approach takes into account the influence of emotions, the environment, and lifestyle on the skin in order to better understand its needs and provide an engaging skincare experience.",
     },
     questions: [
       {
