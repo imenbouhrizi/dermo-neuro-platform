@@ -1,5 +1,5 @@
 export type Lang = "fr" | "en";
-export type QuestionType = "choice" | "likert" | "open" | "country";
+export type QuestionType = "choice" | "multiple" | "likert" | "open" | "country";
 
 export type Question = {
   id: string;
@@ -155,8 +155,8 @@ export const questionnaireSections: QuestionnaireSection[] = [
       {
         id: "simplicite",
         text: {
-          fr: "Le concept me paraît simple, intuitif et facile à comprendre.",
-          en: "The concept seems simple, intuitive and easy to understand.",
+          fr: "Ce concept me paraît simple, intuitif et facile à comprendre.",
+          en: "This concept seems simple, intuitive and easy to understand.",
         },
         type: "likert",
         required: true,
@@ -382,7 +382,7 @@ export const questionnaireSections: QuestionnaireSection[] = [
           fr: "Canal d’achat préféré",
           en: "Preferred purchase channel",
         },
-        type: "choice",
+        type: "multiple",
         options: {
           fr: [
             "Pharmacie",
@@ -425,7 +425,6 @@ export const questionnaireSections: QuestionnaireSection[] = [
           en: "What do you think is currently missing from skincare products?",
         },
         type: "open",
-        required: true,
       },
       {
         id: "experience_ideale",
@@ -434,7 +433,6 @@ export const questionnaireSections: QuestionnaireSection[] = [
           en: "What words do you associate with an ideal skincare experience?",
         },
         type: "open",
-        required: true,
       },
     ],
   },
