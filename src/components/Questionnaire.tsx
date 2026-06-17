@@ -27,7 +27,7 @@ export default function Questionnaire({ lang }: { lang: Lang }) {
     "EG", "SV", "GQ", "ER", "EE", "SZ", "ET", "FK", "FO", "FJ", "FI", "FR", "GF",
     "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU",
     "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN",
-    "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE",
+    "ID", "IR", "IQ", "IE", "IM", "IT", "JM", "JP", "JE", "JO", "KZ", "KE",
     "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT",
     "LU", "MO", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT",
     "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP",
@@ -41,14 +41,19 @@ export default function Questionnaire({ lang }: { lang: Lang }) {
     "ZM", "ZW",
   ];
 
-  const countryList = useMemo(() => {
-    const displayNames = new Intl.DisplayNames([lang], { type: "region" });
+const countryList = useMemo(() => {
+  const displayNames = new Intl.DisplayNames([lang], { type: "region" });
 
-    return countryCodes
-      .map((code) => displayNames.of(code))
-      .filter((country): country is string => Boolean(country))
-      .sort((a, b) => a.localeCompare(b, lang));
-  }, [lang]);
+  return countryCodes
+    .map((code) => ({
+      code,
+      name: code === "PS" ? "Palestine" : displayNames.of(code),
+    }))
+    .filter((country): country is { code: string; name: string } =>
+      Boolean(country.name)
+    )
+    .sort((a, b) => a.name.localeCompare(b.name, lang));
+}, [lang]);
 
   const handleAnswer = (id: string, value: string | number) => {
     setAnswers((prev) => ({
@@ -237,10 +242,12 @@ export default function Questionnaire({ lang }: { lang: Lang }) {
                   </option>
 
                   {countryList.map((country) => (
-                    <option key={country} value={country}>
-                      {country}
+                    <option key={country.code} value={country.name}>
+                      {country.name}
                     </option>
                   ))}
+
+
                 </select>
               )}
 
